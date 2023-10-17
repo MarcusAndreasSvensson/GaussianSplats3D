@@ -37,4 +37,17 @@ export class PlyLoader {
         });
     }
 
+    loadFromArrayBuffer(plyFileData) {
+        return new Promise((resolve, reject) => {
+            try {
+                const plyParser = new PlyParser(plyFileData);
+                const splatBuffer = plyParser.parseToSplatBuffer();
+                this.splatBuffer = splatBuffer;
+                resolve(splatBuffer);
+            } catch (error) {
+                reject(error);
+            }
+        });
+    }
+
 }
